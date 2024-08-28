@@ -50,7 +50,7 @@ class ProfileScreenState extends BaseState<ProfileScreen> with BaseScreenMixin {
         const SizedBox(height: 20),
         const RowInformation(
           titleLeft: "Github",
-          titleRight: "https://github.com/hieugiax145",
+          titleRight: "https://github.com/hieugiax145/iot_project_app",
         ),
         const SizedBox(height: 8),
         const RowInformation(
