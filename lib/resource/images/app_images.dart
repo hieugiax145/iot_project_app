@@ -12,7 +12,7 @@ class AppImages {
   static const iconHistory = "${imagePath}icon_nav_history.png";
   static const iconHistoryFill = "${imagePath}icon_nav_history_fill.png";
   static const iconInfo = "${imagePath}icon_nav_info.png";
-  static const iconInfoFill = "${imagePath}icon_nav_info.png";
+  static const iconInfoFill = "${imagePath}icon_nav_info_fill.png";
 
   //sensors
   static const sensorHumidity = "${imagePath}humidity.png";

@@ -20,14 +20,17 @@ class RowInformation extends StatelessWidget {
             titleLeft ?? "",
             style: AppFonts.normalBold(16),
           )),
-          RichText(
-              text: TextSpan(
-                  text: titleRight ?? "",
-                  style: AppFonts.light(16, Colors.blue),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () async {
-                      await launchUrl(Uri.parse(titleRight!));
-                    }))
+          Flexible(
+            flex: 3,
+            child: RichText(
+                text: TextSpan(
+                    text: titleRight ?? "",
+                    style: AppFonts.light(16, Colors.blue),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        await launchUrl(Uri.parse(titleRight!));
+                      })),
+          )
         ],
       ),
     );

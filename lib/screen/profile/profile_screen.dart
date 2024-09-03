@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iot_app/app/app_themes.dart';
+import 'package:iot_app/provider/sensors_provider.dart';
 import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
 import 'package:iot_app/screen/base_screen/bases_creen.dart';
 import 'package:iot_app/widgets/row_information.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends BaseScreen {
   const ProfileScreen({super.key});
@@ -19,6 +21,13 @@ class ProfileScreenState extends BaseState<ProfileScreen> with BaseScreenMixin {
 
   @override
   Widget? buildLeftWidget() => const SizedBox.shrink();
+
+  getData() async{
+    await context.read<SensorsProvider>().getData();
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) => getData();
 
   @override
   Widget buildBody(BuildContext context) {
@@ -54,8 +63,15 @@ class ProfileScreenState extends BaseState<ProfileScreen> with BaseScreenMixin {
         ),
         const SizedBox(height: 8),
         const RowInformation(
+          titleLeft: "Report",
+        ),
+        const SizedBox(height: 8),
+        const RowInformation(
           titleLeft: "Swagger",
         ),
+        TextButton(onPressed: (){
+          context.read<SensorsProvider>().getData();
+        }, child: Text("click"))
       ],
     );
   }

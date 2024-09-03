@@ -3,7 +3,11 @@ import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 
 class SensorWidget extends StatefulWidget {
-  const SensorWidget({super.key});
+  const SensorWidget({super.key, this.temp, this.hum, this.light});
+
+  final num? temp;
+  final num? hum;
+  final num? light;
 
   @override
   State<SensorWidget> createState() => _SensorWidgetState();
@@ -15,16 +19,19 @@ class _SensorWidgetState extends State<SensorWidget> {
     return Container(
       // height: 80,
       width: double.infinity,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16)),
+      // padding: const EdgeInsets.all(12),
+      // decoration: BoxDecoration(
+      //     color: Colors.white, borderRadius: BorderRadius.circular(16)),
       child: Wrap(
+        // spacing: 16,
         alignment: WrapAlignment.spaceBetween,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           Container(
-              padding: const EdgeInsets.all(4),
-              width: (MediaQuery.of(context).size.width - 80) / 3,
+              padding: const EdgeInsets.all(12),
+              width: (MediaQuery.of(context).size.width - 72) / 3,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,7 +45,7 @@ class _SensorWidgetState extends State<SensorWidget> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "30",
+                        (widget.temp??0).toString(),
                         style: AppFonts.light(28),
                       ),
                       const SizedBox(width: 12),
@@ -48,8 +55,10 @@ class _SensorWidgetState extends State<SensorWidget> {
                 ],
               )),
           Container(
-              padding: const EdgeInsets.all(4),
-              width: (MediaQuery.of(context).size.width - 80) / 3,
+              padding: const EdgeInsets.all(12),
+              width: (MediaQuery.of(context).size.width - 72) / 3,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,7 +72,7 @@ class _SensorWidgetState extends State<SensorWidget> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "30",
+                        (widget.hum??0).toString(),
                         style: AppFonts.light(28),
                       ),
                       const SizedBox(width: 12),
@@ -73,8 +82,10 @@ class _SensorWidgetState extends State<SensorWidget> {
                 ],
               )),
           Container(
-              padding: const EdgeInsets.all(4),
-              width: (MediaQuery.of(context).size.width - 80) / 3,
+              padding: const EdgeInsets.all(12),
+              width: (MediaQuery.of(context).size.width - 72) / 3,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,17 +98,43 @@ class _SensorWidgetState extends State<SensorWidget> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Expanded(
-                        child: Text(
-                          "30",
-                          style: AppFonts.light(28),
-                        ),
+                      Text(
+                        (widget.light??0).toString(),
+                        style: AppFonts.light(28),
                       ),
+                      const SizedBox(width: 12),
                       Flexible(child: Image.asset(AppImages.sensorLight)),
                     ],
                   ),
                 ],
               )),
+          // Container(
+          //     padding: const EdgeInsets.all(4),
+          //     width: (MediaQuery.of(context).size.width - 80) / 3,
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         Text(
+          //           "Light",
+          //           style: AppFonts.normalBold(12),
+          //         ),
+          //         const SizedBox(height: 16),
+          //         Row(
+          //           crossAxisAlignment: CrossAxisAlignment.end,
+          //           children: [
+          //             Expanded(
+          //               child: Text(
+          //                 "30",
+          //                 style: AppFonts.light(28),
+          //               ),
+          //             ),
+          //             const SizedBox(width: 12),
+          //             Flexible(child: Image.asset(AppImages.sensorLight)),
+          //           ],
+          //         ),
+          //       ],
+          //     )),
           // SizedBox(
           //     width: (MediaQuery.of(context).size.width - 80) / 3,
           //     child: Image.asset(AppImages.sensorHumidity)),
