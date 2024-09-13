@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:iot_app/app/app_themes.dart';
 import 'package:iot_app/provider/sensors_provider.dart';
 import 'package:iot_app/screen/home_main.dart';
+import 'package:iot_app/widgets/keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -24,14 +25,16 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_)=>SensorsProvider())
       ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: AppThemes.background),
-          useMaterial3: true,
+      child: KeyboardDismiss(
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: AppThemes.background),
+            useMaterial3: true,
+          ),
+          home: const HomeMain()
         ),
-        home: const HomeMain()
       ),
     );
   }

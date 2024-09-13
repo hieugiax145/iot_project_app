@@ -30,7 +30,7 @@ class SensorsProvider extends ChangeNotifier {
   get currentPage => _currentPage;
 
   SensorsProvider() {
-    socket = IO.io('http://192.168.1.174:3001',
+    socket = IO.io('http://192.168.88.108:3001',
         IO.OptionBuilder().setTransports(['websocket']).build());
     socket.onConnect((_) {
       print("connected");
@@ -99,7 +99,7 @@ class SensorsProvider extends ChangeNotifier {
         _list
           ..clear()
           ..addAll(list);
-        totalItem = list.length;
+        totalItem = int.parse(res.data["totalCount"]);
         notifyListeners();
       }
     });

@@ -5,6 +5,7 @@ import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
 import 'package:iot_app/screen/base_screen/bases_creen.dart';
+import 'package:iot_app/screen/test_screen.dart';
 import 'package:iot_app/widgets/row_information.dart';
 import 'package:provider/provider.dart';
 
@@ -70,7 +71,7 @@ class ProfileScreenState extends BaseState<ProfileScreen> with BaseScreenMixin {
           titleLeft: "Swagger",
         ),
         TextButton(onPressed: (){
-          context.read<SensorsProvider>().getData();
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>TestScreen()));
         }, child: Text("click"))
       ],
     );

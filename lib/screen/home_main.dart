@@ -16,7 +16,7 @@ class HomeMain extends StatefulWidget {
 
 class _HomeMainState extends State<HomeMain> {
   List tabs = [
-    DashboardScreen(),
+    const DashboardScreen(),
     const DataSensorScreen(),
     const ActionHistoryScreen(),
     const ProfileScreen()
@@ -27,12 +27,13 @@ class _HomeMainState extends State<HomeMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppThemes.background,
       bottomNavigationBar: Container(
         height: 64,
         decoration: const BoxDecoration(color: AppThemes.background),
         child: Container(
-          decoration: BoxDecoration(boxShadow: [
+          decoration: const BoxDecoration(boxShadow: [
             BoxShadow(
                 color: Colors.grey,
                 offset: Offset(0, 1),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:iot_app/app/app_themes.dart';
 import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
+import 'package:iot_app/widgets/sensor_tile.dart';
 
 class SensorWidget extends StatefulWidget {
   const SensorWidget({super.key, this.temp, this.hum, this.light});
@@ -19,128 +21,13 @@ class _SensorWidgetState extends State<SensorWidget> {
     return Container(
       // height: 80,
       width: double.infinity,
-      // padding: const EdgeInsets.all(12),
-      // decoration: BoxDecoration(
-      //     color: Colors.white, borderRadius: BorderRadius.circular(16)),
       child: Wrap(
-        // spacing: 16,
         alignment: WrapAlignment.spaceBetween,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          Container(
-              padding: const EdgeInsets.all(12),
-              width: (MediaQuery.of(context).size.width - 72) / 3,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Temperature",
-                    style: AppFonts.normalBold(12),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        (widget.temp??0).toString(),
-                        style: AppFonts.light(28),
-                      ),
-                      const SizedBox(width: 12),
-                      Flexible(child: Image.asset(AppImages.sensorTemp)),
-                    ],
-                  ),
-                ],
-              )),
-          Container(
-              padding: const EdgeInsets.all(12),
-              width: (MediaQuery.of(context).size.width - 72) / 3,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Humidity",
-                    style: AppFonts.normalBold(12),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        (widget.hum??0).toString(),
-                        style: AppFonts.light(28),
-                      ),
-                      const SizedBox(width: 12),
-                      Flexible(child: Image.asset(AppImages.sensorHumidity)),
-                    ],
-                  ),
-                ],
-              )),
-          Container(
-              padding: const EdgeInsets.all(12),
-              width: (MediaQuery.of(context).size.width - 72) / 3,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Light",
-                    style: AppFonts.normalBold(12),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        (widget.light??0).toString(),
-                        style: AppFonts.light(28),
-                      ),
-                      const SizedBox(width: 12),
-                      Flexible(child: Image.asset(AppImages.sensorLight)),
-                    ],
-                  ),
-                ],
-              )),
-          // Container(
-          //     padding: const EdgeInsets.all(4),
-          //     width: (MediaQuery.of(context).size.width - 80) / 3,
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //       children: [
-          //         Text(
-          //           "Light",
-          //           style: AppFonts.normalBold(12),
-          //         ),
-          //         const SizedBox(height: 16),
-          //         Row(
-          //           crossAxisAlignment: CrossAxisAlignment.end,
-          //           children: [
-          //             Expanded(
-          //               child: Text(
-          //                 "30",
-          //                 style: AppFonts.light(28),
-          //               ),
-          //             ),
-          //             const SizedBox(width: 12),
-          //             Flexible(child: Image.asset(AppImages.sensorLight)),
-          //           ],
-          //         ),
-          //       ],
-          //     )),
-          // SizedBox(
-          //     width: (MediaQuery.of(context).size.width - 80) / 3,
-          //     child: Image.asset(AppImages.sensorHumidity)),
-          // SizedBox(
-          //     width: (MediaQuery.of(context).size.width - 80) / 3,
-          //     child: Image.asset(AppImages.sensorLight)),
+          SensorTile(title: "Temperature",value: widget.temp??0,icon: AppImages.sensorTemp,color: [AppThemes.temp0,AppThemes.temp1,AppThemes.temp2,AppThemes.temp3,AppThemes.temp4,AppThemes.temp5]),
+          SensorTile(title: "Humidity",value: widget.hum??0,icon: AppImages.sensorHumidity,color: [AppThemes.temp0,AppThemes.temp1,AppThemes.temp2,AppThemes.temp3,AppThemes.temp4,AppThemes.temp5]),
+          SensorTile(title: "Light",value: widget.light??0,icon: AppImages.sensorLight,color: [AppThemes.temp0,AppThemes.temp1,AppThemes.temp2,AppThemes.temp3,AppThemes.temp4,AppThemes.temp5])
         ],
       ),
     );

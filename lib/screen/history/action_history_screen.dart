@@ -6,7 +6,10 @@ import 'package:iot_app/screen/base_screen/bases_creen.dart';
 import 'package:iot_app/widgets/table_history.dart';
 
 import '../../app/app_themes.dart';
+import '../../resource/images/app_images.dart';
 import '../../widgets/table_sensor.dart';
+import '../../widgets/touchable_widget.dart';
+import '../sensor/data_sensor_filter.dart';
 
 class ActionHistoryScreen extends BaseScreen {
   const ActionHistoryScreen({super.key});
@@ -27,6 +30,55 @@ class ActionHistoryScreenState extends BaseState<ActionHistoryScreen>
   Widget buildBody(BuildContext context) {
     return Column(
       children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: IntrinsicHeight(
+            child: SizedBox(
+              height: 48,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(
+                    child: Container(
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                          color: AppThemes.white,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: const Center(
+                        child: TextField(
+                          decoration: InputDecoration(
+                              hintText: "Search",
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 8)),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  TouchableWidget(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DataSensorFilter()));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                          color: AppThemes.white, shape: BoxShape.circle),
+                      child: Image.asset(
+                        AppImages.iconFilter,
+                        // height: 24,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
         const Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),

@@ -29,45 +29,37 @@ abstract class BaseState<Screen extends BaseScreen> extends State<Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        blankPage()
-            ? buildBody(context)
-            : GestureDetector(
-                child: Scaffold(
-                  resizeToAvoidBottomInset: fixExpanded(),
-                  backgroundColor: setBackgroundColor() ?? AppThemes.background,
-                  body: SafeArea(
-                    child: Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          child: (fixSizeHeader()
-                              ? Stack(
-                                  children: [
-                                    Container(
-                                      child: buildHeader(),
-                                    ),
-                                    Container(
-                                      child: buildBody(context),
-                                    )
-                                  ],
-                                )
-                              : Column(
-                                  children: [
-                                    buildHeader(),
-                                    Expanded(
-                                        child: Container(
-                                      child: buildBody(context),
-                                    ))
-                                  ],
-                                )),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              )
-      ],
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: setBackgroundColor() ?? AppThemes.background,
+      body: SafeArea(
+        child: Builder(
+          builder: (BuildContext context) {
+            return Container(
+              child: (fixSizeHeader()
+                  ? Stack(
+                      children: [
+                        Container(
+                          child: buildHeader(),
+                        ),
+                        Container(
+                          child: buildBody(context),
+                        )
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        buildHeader(),
+                        Expanded(
+                            child: Container(
+                          child: buildBody(context),
+                        ))
+                      ],
+                    )),
+            );
+          },
+        ),
+      ),
     );
   }
 }

@@ -25,4 +25,7 @@ class AppImages {
   static const deviceFanOn = "${imagePath}icon_fan_on.png";
   static const deviceFanOff = "${imagePath}icon_fan_off.png";
   static const deviceFanColor = "${imagePath}icon_fan_color.png";
+
+  //other icon
+  static const iconFilter = "${imagePath}filter.png";
 }
