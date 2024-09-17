@@ -5,7 +5,7 @@ import 'package:iot_app/network/api_base/api_client.dart';
 import 'api_base/api_response.dart';
 
 class ApiRequest {
-  static const String domain = "http://192.168.88.108:3000";
+  static const String domain = "https://ioy-project-be.onrender.com";
 
   static Future<ApiResponse> getLatestData() async {
     return await ApiClient()

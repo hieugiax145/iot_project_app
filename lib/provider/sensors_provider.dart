@@ -30,7 +30,7 @@ class SensorsProvider extends ChangeNotifier {
   get currentPage => _currentPage;
 
   SensorsProvider() {
-    socket = IO.io('http://192.168.88.108:3001',
+    socket = IO.io('https://ioy-project-be.onrender.com',
         IO.OptionBuilder().setTransports(['websocket']).build());
     socket.onConnect((_) {
       print("connected");
