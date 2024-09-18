@@ -23,8 +23,8 @@ class ProfileScreenState extends BaseState<ProfileScreen> with BaseScreenMixin {
   @override
   Widget? buildLeftWidget() => const SizedBox.shrink();
 
-  getData() async{
-    await context.read<SensorsProvider>().getData();
+  getData() async {
+    await context.read<SensorsProvider>().getSensorsData();
   }
 
   @override
@@ -69,10 +69,7 @@ class ProfileScreenState extends BaseState<ProfileScreen> with BaseScreenMixin {
         const SizedBox(height: 8),
         const RowInformation(
           titleLeft: "Swagger",
-        ),
-        TextButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>TestScreen()));
-        }, child: Text("click"))
+        )
       ],
     );
   }

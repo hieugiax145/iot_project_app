@@ -33,7 +33,7 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
   Widget? buildLeftWidget() => const SizedBox.shrink();
 
   fetchData() async {
-    await context.read<SensorsProvider>().firstData();
+    await context.read<SensorsProvider>().firstSensorsData();
   }
 
   // @override
@@ -42,9 +42,10 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
   // }
   @override
   void initState() {
-    // TODO: implement initState
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchData();
+    });
     super.initState();
-    fetchData();
   }
 
   @override
@@ -103,16 +104,23 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
               ),
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              child: Column(
-                children: [
-                  TableSensor(listData: value.list),
-                ],
-              ),
-            ),
-          ),
+          value.loading
+              ? const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+              : Expanded(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: Column(
+                      children: [
+                        TableSensor(listData: value.list),
+                      ],
+                    ),
+                  ),
+                ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             decoration: const BoxDecoration(
@@ -125,9 +133,9 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
                 Expanded(child: Text("Tổng: ${value.totalItem}")),
                 PageNumber(
                     currentPage: value.currentPage,
-                    totalPage: 10,
+                    totalPage: value.totalPage,
                     onTap: (e) {
-                      value.pageChange(e);
+                      value.pageSensorsChange(e);
                     })
               ],
             ),

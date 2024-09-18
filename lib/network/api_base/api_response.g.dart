@@ -12,7 +12,7 @@ ApiResponse _$ApiResponseFromJson(Map<String, dynamic> json) {
     data: json['data'],
     message: json['message'] as String,
     result: json['code'] == 200,
-    total: json['total'],
+    totalCount: json['totalCount'],
     // totalItem: json['totalItem'] as int,
     // totalItemRespondent: json['totalItemRespondent'] as int,
   );
@@ -24,7 +24,7 @@ Map<String, dynamic> _$ApiResponseToJson(ApiResponse instance) =>
       'data': instance.data,
       'message': instance.message ?? "",
       'result': instance.result,
-      'total': instance.total,
+      'total': instance.totalCount,
       //   'totalItem': instance.totalItem,
       //  'totalItemRespondent': instance.totalItemRespondent,
     };

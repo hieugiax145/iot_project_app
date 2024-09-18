@@ -6,7 +6,8 @@ import '../resource/fonts/app_fonts.dart';
 import '../resource/images/app_images.dart';
 
 class SensorTile extends StatefulWidget {
-  const SensorTile({super.key, this.title,required this.value, this.icon, this.color});
+  const SensorTile(
+      {super.key, this.title, required this.value, this.icon, this.color});
 
   final String? title;
   final num value;
@@ -25,11 +26,39 @@ class _SensorTileState extends State<SensorTile> {
         width: (MediaQuery.of(context).size.width - 72) / 3,
         decoration: BoxDecoration(
             color: widget.title == "Temperature"
-                ? (widget.value<=10?widget.color![0]:widget.value<=20?widget.color![1]:widget.value<=25?widget.color![3]:widget.value!<=35?widget.color![4]:widget.color![5])
+                ? (widget.value <= 10
+                    ? widget.color![0]
+                    : widget.value <= 20
+                        ? widget.color![1]
+                        : widget.value <= 25
+                            ? widget.color![3]
+                            : widget.value <= 35
+                                ? widget.color![4]
+                                : widget.color![5])
                 : widget.title == "Humidity"
-                    ? widget.color![1]
+                    ? (widget.value <= 10
+                        ? widget.color![0]
+                        : widget.value <= 30
+                            ? widget.color![1]
+                            : widget.value <= 45
+                                ? widget.color![2]
+                                : widget.value <= 65
+                                    ? widget.color![3]
+                                    : widget.value <= 90
+                                        ? widget.color![4]
+                                        : widget.color![5])
                     : widget.title == "Light"
-                        ? widget.color![2]
+                        ? (widget.value >= 900
+                            ? widget.color![0]
+                            : widget.value >= 600
+                                ? widget.color![1]
+                                : widget.value >= 400
+                                    ? widget.color![2]
+                                    : widget.value >= 200
+                                        ? widget.color![3]
+                                        : widget.value >= 100
+                                            ? widget.color![4]
+                                            : widget.color![5])
                         : AppThemes.white,
             borderRadius: BorderRadius.circular(16)),
         child: Column(

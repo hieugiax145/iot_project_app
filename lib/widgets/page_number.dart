@@ -26,17 +26,21 @@ class PageNumber extends StatelessWidget {
   Widget _baseRow(BuildContext context, List<Widget> numberPages) {
     return Row(
       children: [
-        TouchableWidget(
-          onPressed: () => onTap(currentPage - 1),
-          child: Icon(Icons.navigate_before),
-        ),
-        ...numberPages.addBetween(SizedBox(
+        currentPage == 1
+            ? const SizedBox.shrink()
+            : TouchableWidget(
+                onPressed: () => onTap(currentPage - 1),
+                child: const Icon(Icons.navigate_before),
+              ),
+        ...numberPages.addBetween(const SizedBox(
           width: 8,
         )),
-        TouchableWidget(
-          onPressed: () => onTap(currentPage + 1),
-          child: Icon(Icons.navigate_next),
-        )
+        currentPage == totalPage
+            ? const SizedBox.shrink()
+            : TouchableWidget(
+                onPressed: () => onTap(currentPage + 1),
+                child: const Icon(Icons.navigate_next),
+              )
       ],
     );
   }
@@ -51,12 +55,12 @@ class PageNumber extends StatelessWidget {
       currentPage == 1 || currentPage == 2
           ? ItemPage(text: '2', value: currentPage == 2, onTap: () => onTap(2))
           : ItemPage(
-        icon: Icon(
-          Icons.more_horiz,
-          color: const Color(0xff232325),
-          size: MediaQuery.of(context).size.width / 27,
-        ),
-      ),
+              icon: Icon(
+                Icons.more_horiz,
+                color: const Color(0xff232325),
+                size: MediaQuery.of(context).size.width / 27,
+              ),
+            ),
       currentPage == 1 || currentPage == 2
           ? ItemPage(text: '3', value: currentPage == 3, onTap: () => onTap(3))
           : currentPage == totalPage || currentPage == totalPage - 1
@@ -93,7 +97,7 @@ class PageNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (totalPage < 2) {
-      return ItemPage(
+      return const ItemPage(
         text: '1',
         value: true,
       );
@@ -104,7 +108,7 @@ class PageNumber extends StatelessWidget {
     if (totalPage > 5) {
       return _baseRow(context, _morePage(context));
     }
-    return SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 }
 

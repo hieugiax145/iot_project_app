@@ -9,7 +9,7 @@ class ApiResponse {
   dynamic data;
   String? message;
   bool? result;
-  int? total;
+  int? totalCount;
   // int? totalItem;
   // int? totalItemRespondent;
 
@@ -21,7 +21,7 @@ class ApiResponse {
     this.data,
     this.message,
     this.result,
-    this.total,
+    this.totalCount,
     // this.totalItem,
     // this.totalItemRespondent,
   });

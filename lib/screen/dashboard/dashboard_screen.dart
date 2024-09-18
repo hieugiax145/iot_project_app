@@ -104,7 +104,7 @@ class DashboardScreenState extends BaseState<DashboardScreen>
                     iconOff: AppImages.deviceLightOff,
                     value: light,
                     onChanged: (e) {
-                      ApiRequest.changeAction(e==true?1:0);
+                      ApiRequest.changeAction(e == true ? 1 : 0);
                       setState(() {
                         light = e;
                       });
