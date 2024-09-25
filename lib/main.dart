@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iot_app/app/app_themes.dart';
-import 'package:iot_app/provider/sensors_provider.dart';
+import 'package:iot_app/provider/data_provider.dart';
 import 'package:iot_app/screen/home_main.dart';
 import 'package:iot_app/widgets/keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_)=>SensorsProvider())
+        ChangeNotifierProvider(create: (_)=>DataProvider())
       ],
       child: KeyboardDismiss(
         child: MaterialApp(

@@ -62,21 +62,21 @@ class _TableHistoryState extends State<TableHistory> {
               itemCount: widget.listData.length,
               itemBuilder: (context, index) {
                 var data = widget.listData[index];
-                return _buildRowData(data);
+                return _buildRowData(index + 1, data);
               })
         ],
       ),
     );
   }
 
-  Widget _buildRowData(ActionModel data) {
+  Widget _buildRowData(int index, ActionModel data) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-              child: Text("No",
+              child: Text(index.toString(),
                   textAlign: TextAlign.center, style: AppFonts.light())),
           Expanded(
               child: Text(data.device ?? "",
@@ -86,8 +86,11 @@ class _TableHistoryState extends State<TableHistory> {
                   textAlign: TextAlign.center, style: AppFonts.light())),
           Expanded(
               flex: 2,
-              child: Text(AppFunction.formatDateTimeFromApi(data.time),
-                  textAlign: TextAlign.center, style: AppFonts.light()))
+              child: Text(
+                  AppFunction.formatDateTimeFromApi(data.time, haveTime: true),
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  style: AppFonts.light()))
         ],
       ),
     );

@@ -1,9 +1,8 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:iot_app/app/app_themes.dart';
 import 'package:iot_app/network/api_request.dart';
-import 'package:iot_app/provider/sensors_provider.dart';
+import 'package:iot_app/provider/data_provider.dart';
 import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
@@ -13,9 +12,6 @@ import 'package:iot_app/widgets/chart.dart';
 import 'package:iot_app/widgets/sensor_status.dart';
 import 'package:iot_app/widgets/sensor_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:web_socket_channel/io.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 // class DashboardScreen extends StatefulWidget {
 //   const DashboardScreen({super.key});
@@ -60,7 +56,7 @@ class DashboardScreenState extends BaseState<DashboardScreen>
   bool light = false;
 
   fetchData() async {
-    await context.read<SensorsProvider>().getNewData();
+    await context.read<DataProvider>().getNewData();
   }
 
   @override
@@ -72,8 +68,8 @@ class DashboardScreenState extends BaseState<DashboardScreen>
 
   @override
   Widget buildBody(BuildContext context) {
-    return Consumer<SensorsProvider>(
-        builder: (BuildContext context, SensorsProvider sensor, Widget? child) {
+    return Consumer<DataProvider>(
+        builder: (BuildContext context, DataProvider sensor, Widget? child) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(

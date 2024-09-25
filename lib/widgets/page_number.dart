@@ -30,16 +30,26 @@ class PageNumber extends StatelessWidget {
             ? const SizedBox.shrink()
             : TouchableWidget(
                 onPressed: () => onTap(currentPage - 1),
-                child: const Icon(Icons.navigate_before),
+                child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: AppThemes.background),
+                    child: const Icon(Icons.navigate_before)),
               ),
+        const SizedBox(width: 4),
         ...numberPages.addBetween(const SizedBox(
           width: 8,
         )),
+        const SizedBox(width: 4),
         currentPage == totalPage
             ? const SizedBox.shrink()
             : TouchableWidget(
                 onPressed: () => onTap(currentPage + 1),
-                child: const Icon(Icons.navigate_next),
+                child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: AppThemes.background),
+                    child: const Icon(Icons.navigate_next)),
               )
       ],
     );
@@ -124,13 +134,16 @@ class ItemPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return TouchableWidget(
         onPressed: onTap,
-        child: icon ??
-            Text(
-              text ?? "",
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppFonts.regular(
-                  14, value == true ? AppThemes.background : Colors.black),
-            ));
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: icon ??
+              Text(
+                text ?? "",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppFonts.regular(
+                    16, value == true ? AppThemes.background : Colors.black),
+              ),
+        ));
   }
 }

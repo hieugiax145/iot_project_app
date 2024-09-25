@@ -8,7 +8,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import '../model/sensors_data_model.dart';
 
-class SensorsProvider extends ChangeNotifier {
+class DataProvider extends ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
   set loading(bool value) {
@@ -40,8 +40,8 @@ class SensorsProvider extends ChangeNotifier {
 
   get currentPage => _currentPage;
 
-  SensorsProvider() {
-    socket = IO.io('http://192.168.88.108:3000',
+  DataProvider() {
+    socket = IO.io(ApiRequest.domain,
         IO.OptionBuilder().setTransports(['websocket']).build());
     socket.onConnect((_) {
       print("connected");
@@ -53,7 +53,7 @@ class SensorsProvider extends ChangeNotifier {
     socket.on('latestData', (data) {
       print(data);
       _latest2 = SensorsDataModel.fromJson(data);
-      if (_listRealtime.length == 6) {
+      if (_listRealtime.length == 8) {
         _listRealtime.removeAt(0);
       }
       _listRealtime.add(_latest2);
@@ -84,7 +84,22 @@ class SensorsProvider extends ChangeNotifier {
 
   setPage(int? page) {
     query.page = page;
-    // notifyListeners();
+    notifyListeners();
+  }
+
+  setOrder(String? order) {
+    query.order = order;
+    notifyListeners();
+  }
+
+  setStartDate(String? date) {
+    query.startDate = date;
+    notifyListeners();
+  }
+
+  setEndDate(String? date) {
+    query.endDate = date;
+    notifyListeners();
   }
 
   pageSensorsChange(int page) {
@@ -103,7 +118,9 @@ class SensorsProvider extends ChangeNotifier {
     await ApiRequest.getSensorsData(
             page: query.page ?? _currentPage,
             limit: query.limit ?? _size,
-            order: query.order)
+            order: query.order,
+            startDate: query.startDate,
+            endDate: query.endDate)
         .then((res) {
       if (res.message == "Success") {
         final List<SensorsDataModel> list = res.data
@@ -125,7 +142,7 @@ class SensorsProvider extends ChangeNotifier {
   pageActivityChange(int page) {
     _currentPage = page;
     setPage(page);
-    getActionData();
+    getActivity();
   }
 
   firstActivityData() {
@@ -133,12 +150,14 @@ class SensorsProvider extends ChangeNotifier {
     pageActivityChange(1);
   }
 
-  Future<void> getActionData() async {
+  Future<void> getActivity() async {
     loading = true;
-    await ApiRequest.getActionData(
+    await ApiRequest.getActivity(
             page: query.page ?? _currentPage,
             limit: query.limit ?? _size,
-            order: query.order)
+            order: query.order,
+            startDate: query.startDate,
+            endDate: query.endDate)
         .then((res) {
       if (res.message == "Success") {
         final List<ActionModel> list =
@@ -157,6 +176,13 @@ class Query {
   int? page = 1;
   int? limit = 10;
   String? order;
+  String? startDate;
+  String? endDate;
 
-  Query({this.page, this.limit, this.order = "DESC"});
+  Query(
+      {this.page,
+      this.limit,
+      this.order = "DESC",
+      this.startDate,
+      this.endDate});
 }

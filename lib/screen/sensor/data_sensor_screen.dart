@@ -4,11 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:iot_app/app/app_themes.dart';
-import 'package:iot_app/provider/sensors_provider.dart';
+import 'package:iot_app/provider/data_provider.dart';
+import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
 import 'package:iot_app/screen/base_screen/bases_creen.dart';
-import 'package:iot_app/screen/sensor/data_sensor_filter.dart';
+import 'package:iot_app/screen/sensor/data_filter.dart';
 import 'package:iot_app/widgets/page_number.dart';
 import 'package:iot_app/widgets/table_sensor.dart';
 import 'package:iot_app/widgets/touchable_widget.dart';
@@ -33,7 +34,7 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
   Widget? buildLeftWidget() => const SizedBox.shrink();
 
   fetchData() async {
-    await context.read<SensorsProvider>().firstSensorsData();
+    await context.read<DataProvider>().firstSensorsData();
   }
 
   // @override
@@ -50,8 +51,8 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
 
   @override
   Widget buildBody(BuildContext context) {
-    return Consumer<SensorsProvider>(
-        builder: (BuildContext context, SensorsProvider value, Widget? child) {
+    return Consumer<DataProvider>(
+        builder: (BuildContext context, DataProvider value, Widget? child) {
       return Column(
         children: [
           Padding(
@@ -85,8 +86,7 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const DataSensorFilter()));
+                                builder: (context) => const DataFilter()));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(8),
@@ -114,10 +114,12 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: Column(
-                      children: [
-                        TableSensor(listData: value.list),
-                      ],
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          TableSensor(listData: value.list),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -130,7 +132,11 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
                     topRight: Radius.circular(16))),
             child: Row(
               children: [
-                Expanded(child: Text("Tổng: ${value.totalItem}")),
+                Expanded(
+                    child: Text(
+                  "Tổng: ${value.totalItem}",
+                  style: AppFonts.light(),
+                )),
                 PageNumber(
                     currentPage: value.currentPage,
                     totalPage: value.totalPage,

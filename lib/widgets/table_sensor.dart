@@ -66,21 +66,21 @@ class _TableSensorState extends State<TableSensor> {
               itemCount: widget.listData.length,
               itemBuilder: (context, index) {
                 var data = widget.listData[index];
-                return _buildRowData(data);
+                return _buildRowData(index+1,data);
               })
         ],
       ),
     );
   }
 
-  Widget _buildRowData(SensorsDataModel data) {
+  Widget _buildRowData(int index,SensorsDataModel data) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-              child: Text("No",
+              child: Text(index.toString(),
                   textAlign: TextAlign.center, style: AppFonts.light())),
           Expanded(
               child: Text((data.temp ?? 0).toString(),
@@ -94,7 +94,8 @@ class _TableSensorState extends State<TableSensor> {
           Expanded(
               flex: 2,
               child: Text(
-                  AppFunction.formatDateTimeFromApi(data.time),
+                  AppFunction.formatDateTimeFromApi(data.time,haveTime: true),
+                  maxLines: 2,
                   textAlign: TextAlign.center,
                   style: AppFonts.light()))
         ],

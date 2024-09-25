@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:iot_app/provider/sensors_provider.dart';
+import 'package:iot_app/provider/data_provider.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
 import 'package:iot_app/screen/base_screen/bases_creen.dart';
 import 'package:iot_app/widgets/table_history.dart';
@@ -12,7 +12,7 @@ import '../../resource/images/app_images.dart';
 import '../../widgets/page_number.dart';
 import '../../widgets/table_sensor.dart';
 import '../../widgets/touchable_widget.dart';
-import '../sensor/data_sensor_filter.dart';
+import '../sensor/data_filter.dart';
 
 class ActionHistoryScreen extends BaseScreen {
   const ActionHistoryScreen({super.key});
@@ -30,7 +30,7 @@ class ActionHistoryScreenState extends BaseState<ActionHistoryScreen>
   Widget? buildLeftWidget() => const SizedBox.shrink();
 
   fetchData() async {
-    await context.read<SensorsProvider>().firstActivityData();
+    await context.read<DataProvider>().firstActivityData();
   }
 
   // @override
@@ -47,8 +47,8 @@ class ActionHistoryScreenState extends BaseState<ActionHistoryScreen>
 
   @override
   Widget buildBody(BuildContext context) {
-    return Consumer<SensorsProvider>(
-        builder: (BuildContext context, SensorsProvider value, Widget? child) {
+    return Consumer<DataProvider>(
+        builder: (BuildContext context, DataProvider value, Widget? child) {
       return Column(
         children: [
           Padding(
@@ -83,7 +83,7 @@ class ActionHistoryScreenState extends BaseState<ActionHistoryScreen>
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const DataSensorFilter()));
+                                    const DataFilter()));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(8),
@@ -108,12 +108,14 @@ class ActionHistoryScreenState extends BaseState<ActionHistoryScreen>
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: Column(
-                      children: [
-                        TableHistory(
-                          listData: value.actions,
-                        ),
-                      ],
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          TableHistory(
+                            listData: value.actions,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

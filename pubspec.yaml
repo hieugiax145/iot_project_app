@@ -49,6 +49,7 @@ dependencies:
   bottom_picker: ^2.8.0
   auto_size_text: ^3.0.0
   dropdown_button2: ^2.3.9
+  flutter_datetime_picker_plus: ^2.2.0
 
 dev_dependencies:
   flutter_test:

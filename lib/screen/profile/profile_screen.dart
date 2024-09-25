@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iot_app/app/app_themes.dart';
-import 'package:iot_app/provider/sensors_provider.dart';
+import 'package:iot_app/provider/data_provider.dart';
 import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
@@ -24,7 +24,7 @@ class ProfileScreenState extends BaseState<ProfileScreen> with BaseScreenMixin {
   Widget? buildLeftWidget() => const SizedBox.shrink();
 
   getData() async {
-    await context.read<SensorsProvider>().getSensorsData();
+    await context.read<DataProvider>().getSensorsData();
   }
 
   @override
