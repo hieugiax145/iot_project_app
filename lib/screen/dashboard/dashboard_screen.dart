@@ -1,4 +1,4 @@
-
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:iot_app/app/app_themes.dart';
 import 'package:iot_app/network/api_request.dart';
@@ -11,25 +11,8 @@ import 'package:iot_app/utils/extension.dart';
 import 'package:iot_app/widgets/chart.dart';
 import 'package:iot_app/widgets/sensor_status.dart';
 import 'package:iot_app/widgets/sensor_widget.dart';
+import 'package:iot_app/widgets/test_chart.dart';
 import 'package:provider/provider.dart';
-
-// class DashboardScreen extends StatefulWidget {
-//   const DashboardScreen({super.key});
-//
-//   @override
-//   State<DashboardScreen> createState() => _DashboardScreenState();
-// }
-//
-// class _DashboardScreenState extends State<DashboardScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Column(
-//         children: [Text("Dashboard")],
-//       ),
-//     );
-//   }
-// }
 
 class DashboardScreen extends BaseScreen {
   const DashboardScreen({super.key});
@@ -56,13 +39,16 @@ class DashboardScreenState extends BaseState<DashboardScreen>
   bool light = false;
 
   fetchData() async {
-    await context.read<DataProvider>().getNewData();
+    // await context.read<DataProvider>().getNewData();
+    await context.read<DataProvider>().getLatestAction1();
+    await context.read<DataProvider>().getLatestAction2();
+    light = context.read<DataProvider>().device1.action == 1 ? true : false;
+    fan = context.read<DataProvider>().device2.action == 1 ? true : false;
   }
 
   @override
   void initState() {
-    // TODO: implement initState
-    // fetchData();
+    fetchData();
     // context.read<SensorsProvider>().getNewData();
   }
 
@@ -100,9 +86,12 @@ class DashboardScreenState extends BaseState<DashboardScreen>
                     iconOff: AppImages.deviceLightOff,
                     value: light,
                     onChanged: (e) {
-                      ApiRequest.changeAction(e == true ? 1 : 0);
-                      setState(() {
-                        light = e;
+                      ApiRequest.changeAction("led1",e == true ? 1 : 0).then((res) {
+                        if (res.message == "Success") {
+                          setState(() {
+                            light = e;
+                          });
+                        }
                       });
                     },
                   ),
@@ -112,8 +101,12 @@ class DashboardScreenState extends BaseState<DashboardScreen>
                     isSpin: true,
                     value: fan,
                     onChanged: (e) {
-                      setState(() {
-                        fan = e;
+                      ApiRequest.changeAction("led2",e == true ? 1 : 0).then((res) {
+                        if (res.message == "Success") {
+                          setState(() {
+                            fan = e;
+                          });
+                        }
                       });
                     },
                   )
@@ -124,8 +117,10 @@ class DashboardScreenState extends BaseState<DashboardScreen>
                 "Sensors Chart",
                 style: AppFonts.normalBold(16),
               ),
-              ChartSensors(),
-              SizedBox.shrink()
+              // TestChart(),
+              const ChartSensors(),
+
+              const SizedBox.shrink()
             ].addBetween(const SizedBox(height: 16)),
           ),
         ),

@@ -35,15 +35,15 @@ class _TableSensorState extends State<TableSensor> {
                         textAlign: TextAlign.center,
                         style: AppFonts.normalBold())),
                 Expanded(
-                    child: Text("Temp",
+                    child: Text("Temp\n(\u2103)",
                         textAlign: TextAlign.center,
                         style: AppFonts.normalBold())),
                 Expanded(
-                    child: Text("Hum",
+                    child: Text("Hum\n(%)",
                         textAlign: TextAlign.center,
                         style: AppFonts.normalBold())),
                 Expanded(
-                    child: Text("Light",
+                    child: Text("Light\n(%)",
                         textAlign: TextAlign.center,
                         style: AppFonts.normalBold())),
                 Expanded(
@@ -66,18 +66,19 @@ class _TableSensorState extends State<TableSensor> {
               itemCount: widget.listData.length,
               itemBuilder: (context, index) {
                 var data = widget.listData[index];
-                return _buildRowData(index+1,data);
+                return _buildRowData(index + 1, data);
               })
         ],
       ),
     );
   }
 
-  Widget _buildRowData(int index,SensorsDataModel data) {
+  Widget _buildRowData(int index, SensorsDataModel data) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
               child: Text(index.toString(),
@@ -89,12 +90,23 @@ class _TableSensorState extends State<TableSensor> {
               child: Text((data.hum ?? 0).toString(),
                   textAlign: TextAlign.center, style: AppFonts.light())),
           Expanded(
-              child: Text((data.light ?? 0).toString(),
-                  textAlign: TextAlign.center, style: AppFonts.light())),
+              child: Text(
+                  ((100 *
+                                  AppFunction.mapValue(
+                                      (data.light ?? 0).toInt(),
+                                      1024,
+                                      0,
+                                      0,
+                                      100))
+                              .round() /
+                          100)
+                      .toString(),
+                  textAlign: TextAlign.center,
+                  style: AppFonts.light())),
           Expanded(
               flex: 2,
               child: Text(
-                  AppFunction.formatDateTimeFromApi(data.time,haveTime: true),
+                  AppFunction.formatDateTimeFromApi(data.time, haveTime: true),
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: AppFonts.light()))

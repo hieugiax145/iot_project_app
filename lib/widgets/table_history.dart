@@ -71,9 +71,10 @@ class _TableHistoryState extends State<TableHistory> {
 
   Widget _buildRowData(int index, ActionModel data) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
               child: Text(index.toString(),
@@ -82,17 +83,20 @@ class _TableHistoryState extends State<TableHistory> {
               child: Text(data.device ?? "",
                   textAlign: TextAlign.center, style: AppFonts.light())),
           Expanded(
-              child: Text((data.action ?? 0).toString(),
+              child: Text(data.action == 0 ? "OFF" : "ON",
                   textAlign: TextAlign.center, style: AppFonts.light())),
           Expanded(
               flex: 2,
               child: Text(
                   AppFunction.formatDateTimeFromApi(data.time, haveTime: true),
                   maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: AppFonts.light()))
         ],
       ),
     );
   }
+
+
 }

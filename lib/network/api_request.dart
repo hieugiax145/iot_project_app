@@ -6,11 +6,11 @@ import 'package:iot_app/utils/app_function.dart';
 import 'api_base/api_response.dart';
 
 class ApiRequest {
-  static const String domain = "http://192.168.81.52:3000";
+  static const String domain = "http://192.168.253.52:3000";
 
-  static Future<ApiResponse> getLatestData() async {
+  static Future<ApiResponse> getLatestAction(String device) async {
     return await ApiClient()
-        .request(url: "$domain/sensors/latest", method: ApiClient.GET);
+        .request(url: "$domain/activity/latest?device=$device", method: ApiClient.GET);
   }
 
   static Future<ApiResponse> getSensorsData(
@@ -53,8 +53,8 @@ class ApiRequest {
         queryParameters: queryParams);
   }
 
-  static Future<ApiResponse> changeAction(int action) async {
-    Map data = {"action": action};
+  static Future<ApiResponse> changeAction(String device,int action) async {
+    Map data = {"device":device,"action": action};
     return await ApiClient().request(
         url: "$domain/activity",
         method: ApiClient.POST,

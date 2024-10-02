@@ -119,7 +119,7 @@ mixin BaseScreenMixin<Page extends BaseScreen> on BaseState<Page> {
         Container(
           // constraints: BoxConstraints(minHeight: heightHeader),
           // height:heightHeader - MediaQuery.of(context).padding.top,
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
           width: MediaQuery.of(context).size.width,
           // alignment: Alignment.center,
           alignment: Alignment.bottomCenter,
@@ -149,10 +149,7 @@ mixin BaseScreenMixin<Page extends BaseScreen> on BaseState<Page> {
                                   setTitle(),
                                   style: AppFonts.normalBold(24),
                                 )),
-                        TouchableWidget(
-                          padding: const EdgeInsets.all(0),
-                          child: buildRightWidget() ?? const SizedBox.shrink(),
-                        )
+                        buildRightWidget() ?? const SizedBox.shrink()
                       ],
                     ),
               ),

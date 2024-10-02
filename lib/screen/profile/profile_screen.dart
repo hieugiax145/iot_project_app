@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iot_app/app/app_themes.dart';
+import 'package:iot_app/network/api_request.dart';
 import 'package:iot_app/provider/data_provider.dart';
 import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
@@ -69,6 +70,7 @@ class ProfileScreenState extends BaseState<ProfileScreen> with BaseScreenMixin {
         const SizedBox(height: 8),
         const RowInformation(
           titleLeft: "Swagger",
+          titleRight: ApiRequest.domain+"/docs",
         )
       ],
     );

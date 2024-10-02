@@ -27,6 +27,7 @@ class _SensorWidgetState extends State<SensorWidget> {
         children: [
           SensorTile(
               title: "Temperature",
+              unit: "\u2103",
               value: widget.temp ?? 0,
               icon: AppImages.sensorTemp,
               color: [
@@ -39,6 +40,7 @@ class _SensorWidgetState extends State<SensorWidget> {
               ]),
           SensorTile(
               title: "Humidity",
+              unit: "%",
               value: widget.hum ?? 0,
               icon: AppImages.sensorHumidity,
               color: [
@@ -51,6 +53,7 @@ class _SensorWidgetState extends State<SensorWidget> {
               ]),
           SensorTile(
               title: "Light",
+              unit: "%",
               value: widget.light ?? 0,
               icon: AppImages.sensorLight,
               color: [

@@ -14,7 +14,7 @@ import 'package:iot_app/widgets/dropdown_widget.dart';
 import 'package:iot_app/widgets/touchable_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../model/dropdown_model.dart';
+import '../model/dropdown_model.dart';
 
 class DataFilter extends BaseScreen {
   const DataFilter({super.key});
@@ -123,7 +123,7 @@ class DataSensorFilterState extends BaseState<DataFilter> with BaseScreenMixin {
                     data.setOrder(e?.name);
                   },
                 ),
-                _dropDown()
+                // _dropDown()
               ],
             )),
             Padding(
@@ -136,6 +136,7 @@ class DataSensorFilterState extends BaseState<DataFilter> with BaseScreenMixin {
                   const SizedBox(width: 8),
                   _buildButton("Apply", onTap: () {
                     data.getSensorsData();
+                    data.getActivity();
                     Navigator.pop(context);
                   })
                 ],

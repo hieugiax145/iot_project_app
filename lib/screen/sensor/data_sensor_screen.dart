@@ -9,7 +9,7 @@ import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
 import 'package:iot_app/screen/base_screen/bases_creen.dart';
-import 'package:iot_app/screen/sensor/data_filter.dart';
+import 'package:iot_app/screen/data_filter.dart';
 import 'package:iot_app/widgets/page_number.dart';
 import 'package:iot_app/widgets/table_sensor.dart';
 import 'package:iot_app/widgets/touchable_widget.dart';
@@ -33,6 +33,25 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
   @override
   Widget? buildLeftWidget() => const SizedBox.shrink();
 
+  @override
+  Widget? buildRightWidget() => TouchableWidget(
+    onPressed: () {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const DataFilter()));
+    },
+    child: Container(
+      height: 48,
+      padding: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
+          color: AppThemes.white, shape: BoxShape.circle),
+      child: Image.asset(
+        AppImages.iconFilter,
+        // height: 24,
+        fit: BoxFit.cover,
+      ),
+    ),
+  );
+
   fetchData() async {
     await context.read<DataProvider>().firstSensorsData();
   }
@@ -55,55 +74,6 @@ class DataSensorScreenState extends BaseState<DataSensorScreen>
         builder: (BuildContext context, DataProvider value, Widget? child) {
       return Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: IntrinsicHeight(
-              child: SizedBox(
-                height: 48,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      child: Container(
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                            color: AppThemes.white,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: const Center(
-                          child: TextField(
-                            decoration: InputDecoration(
-                                hintText: "Search",
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 8)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    TouchableWidget(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DataFilter()));
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: const BoxDecoration(
-                            color: AppThemes.white, shape: BoxShape.circle),
-                        child: Image.asset(
-                          AppImages.iconFilter,
-                          // height: 24,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
           value.loading
               ? const Expanded(
                   child: Center(

@@ -182,7 +182,8 @@ class AppFunction {
 
   static String formatTime(String? input) {
     if (input != null) {
-      final date = DateTime.parse(input).toLocal();
+      final date =
+          DateTime.parse(input).toLocal().add(const Duration(hours: 7));
       final DateFormat formatter = DateFormat('HH:mm:ss');
       final String formatted = formatter.format(date);
       return formatted;
@@ -193,9 +194,10 @@ class AppFunction {
 
   static String formatDateTimeFromApi(String? input, {bool? haveTime}) {
     if (input != null) {
-      final date = DateTime.parse(input).toLocal();
+      final date =
+          DateTime.parse(input).toLocal().add(const Duration(hours: 7));
       if (haveTime == true) {
-        final DateFormat formatter = DateFormat('dd/MM/yyyy HH:mm:ss');
+        final DateFormat formatter = DateFormat('dd/MM/yyyy\nHH:mm:ss');
         final String formatted = formatter.format(date);
         return formatted;
       } else {
@@ -210,11 +212,20 @@ class AppFunction {
 
   static String? dateTimeFilter(String? input) {
     if (input != null) {
-      DateTime dateTime = DateTime.parse(input);
+      DateTime dateTime =
+          DateTime.parse(input).subtract(const Duration(hours: 7));
       String formattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
       return formattedDate; // Output: 2024-08-03
     }
     return null;
+  }
+
+  static double mapValue(
+      int value, int inputMin, int inputMax, int outputMin, int outputMax) {
+    return (value - inputMin) *
+            (outputMax - outputMin) /
+            (inputMax - inputMin) +
+        outputMin;
   }
 
   // static bool checkEmpty(BuildContext context, String id, String password) {

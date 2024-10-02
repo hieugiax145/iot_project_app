@@ -20,84 +20,62 @@ class ChartSensors extends StatefulWidget {
 class _ChartSensorsState extends State<ChartSensors> {
   ChartSeriesController? _chartSeriesController;
   Timer? timer;
-  // int count = 19;
-  //
-  // List<_ChartData> chartData = <_ChartData>[
-  //   // _ChartData(0, 42),
-  //   // _ChartData(1, 47),
-  //   // _ChartData(2, 33),
-  //   // _ChartData(3, 49),
-  //   // _ChartData(4, 54),
-  //   // _ChartData(5, 41),
-  //   // _ChartData(6, 58),
-  //   // _ChartData(7, 51),
-  //   // _ChartData(8, 98),
-  //   // _ChartData(9, 41),
-  //   // _ChartData(10, 53),
-  //   // _ChartData(11, 72),
-  //   // _ChartData(12, 86),
-  //   // _ChartData(13, 52),
-  //   // _ChartData(14, 94),
-  //   // _ChartData(15, 92),
-  //   // _ChartData(16, 86),
-  //   // _ChartData(17, 72),
-  //   // _ChartData(18, 94),
-  // ];
-  //
+  TooltipBehavior? _tooltipBehavior;
+
   void _updateDataSource(Timer timer) {
-    // chartData.add(_ChartData(count, Random().nextInt(100)));
-    if (context.read<DataProvider>().listRealtime.length == 8) {
-      // context.read<SensorsProvider>().listRemove(0);
+    if (context.read<DataProvider>().listRealtime.length == 5) {
       _chartSeriesController?.updateDataSource(
         addedDataIndexes: <int>[
           context.read<DataProvider>().listRealtime.length - 1
         ],
         removedDataIndexes: <int>[0],
       );
-    } else {
-      _chartSeriesController?.updateDataSource(
-        addedDataIndexes: <int>[
-          context.read<DataProvider>().listRealtime.length - 1
-        ],
-      );
     }
-    // setState(() {
-    // count = count + 1;
-    // });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tooltipBehavior = TooltipBehavior(enable: true);
+    timer =
+        Timer.periodic(const Duration(milliseconds: 1000), _updateDataSource);
   }
 
   @override
   void dispose() {
-    timer?.cancel();
-    // _chartSeriesController.cancel();
     super.dispose();
+    timer?.cancel();
   }
 
   @override
   Widget build(BuildContext context) {
-    timer =
-        Timer.periodic(const Duration(milliseconds: 1000), _updateDataSource);
     return Consumer<DataProvider>(
       builder: (BuildContext context, sensor, Widget? child) {
         return Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 color: AppThemes.white),
             child: Column(
               children: [
                 SfCartesianChart(
-                  title:
-                      ChartTitle(text: sensor.listRealtime.length.toString()),
+                  // title:
+                  //     ChartTitle(text: sensor.listRealtime.length.toString()),
                   primaryXAxis: const CategoryAxis(),
+                  legend: Legend(isVisible: true),
                   // primaryYAxis: CategoryAxis(),
                   enableAxisAnimation: true,
+                  tooltipBehavior: _tooltipBehavior,
                   series: [
                     LineSeries<SensorsDataModel, String>(
                         onRendererCreated: (ChartSeriesController controller) {
                           // Assigning the controller to the _chartSeriesController.
                           _chartSeriesController = controller;
                         },
+                        name: "Temperature",
+                        color: Colors.red,
+                        width: 5,
+                        markerSettings: const MarkerSettings(isVisible: true),
                         enableTooltip: true,
                         dataSource: sensor.listRealtime,
                         xValueMapper: (data, _) =>
@@ -108,6 +86,10 @@ class _ChartSensorsState extends State<ChartSensors> {
                           // Assigning the controller to the _chartSeriesController.
                           _chartSeriesController = controller;
                         },
+                        name: "Humidity",
+                        color: Colors.blue,
+                        width: 5,
+                        markerSettings: const MarkerSettings(isVisible: true),
                         enableTooltip: true,
                         dataSource: sensor.listRealtime,
                         xValueMapper: (data, _) =>
@@ -118,11 +100,17 @@ class _ChartSensorsState extends State<ChartSensors> {
                           // Assigning the controller to the _chartSeriesController.
                           _chartSeriesController = controller;
                         },
+                        name: "Light",
+                        color: Colors.green,
+                        width: 5,
+                        markerSettings: const MarkerSettings(isVisible: true),
+                        // dataLabelSettings: DataLabelSettings(isVisible: true),
                         enableTooltip: true,
                         dataSource: sensor.listRealtime,
                         xValueMapper: (data, _) =>
                             AppFunction.formatTime(data.time),
-                        yValueMapper: (data, _) => data.light),
+                        yValueMapper: (data, _) => AppFunction.mapValue(
+                            data.light!.toInt(), 1024, 0, 0, 100)),
                   ],
                 ),
               ],

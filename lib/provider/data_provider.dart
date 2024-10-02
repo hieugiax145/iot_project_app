@@ -16,14 +16,14 @@ class DataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  SensorsDataModel _latest = SensorsDataModel();
+  ActionModel _latest = ActionModel();
   SensorsDataModel _latest2 = SensorsDataModel();
   List<SensorsDataModel> _list = [];
   List<SensorsDataModel> _listRealtime = [];
 
   late final IO.Socket socket;
 
-  SensorsDataModel get latest => _latest;
+  ActionModel get latest => _latest;
   SensorsDataModel get latest2 => _latest2;
   List<SensorsDataModel> get list => _list;
   List<SensorsDataModel> get listRealtime => _listRealtime;
@@ -53,7 +53,7 @@ class DataProvider extends ChangeNotifier {
     socket.on('latestData', (data) {
       print(data);
       _latest2 = SensorsDataModel.fromJson(data);
-      if (_listRealtime.length == 8) {
+      if (_listRealtime.length == 5) {
         _listRealtime.removeAt(0);
       }
       _listRealtime.add(_latest2);
@@ -66,11 +66,24 @@ class DataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getLatest() async {
-    await ApiRequest.getLatestData().then((res) {
+  ActionModel device1=ActionModel();
+  ActionModel device2=ActionModel();
+
+  Future<void> getLatestAction1() async {
+    await ApiRequest.getLatestAction("led1").then((res) {
       if (res.message == "Success") {
-        final data = SensorsDataModel.fromJson(res.data);
-        _latest = data;
+        final data = ActionModel.fromJson(res.data);
+        device1 = data;
+        notifyListeners();
+      }
+    });
+  }
+
+  Future<void> getLatestAction2() async {
+    await ApiRequest.getLatestAction("led2").then((res) {
+      if (res.message == "Success") {
+        final data = ActionModel.fromJson(res.data);
+        device2 = data;
         notifyListeners();
       }
     });
