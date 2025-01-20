@@ -62,7 +62,7 @@ class _TableSensorState extends State<TableSensor> {
               endIndent: 8),
           ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: widget.listData.length,
               itemBuilder: (context, index) {
                 var data = widget.listData[index];

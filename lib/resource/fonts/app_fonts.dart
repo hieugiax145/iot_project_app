@@ -6,8 +6,7 @@ class AppFonts {
   AppFonts._();
 
   //FontWeight 400
-  static TextStyle light([double fontSize = 16, Color color = Colors.black]) =>
-      TextStyle(
+  static TextStyle light([double fontSize = 16, Color color = Colors.black]) => TextStyle(
         height: 0.8,
         fontWeight: FontWeight.w400,
         fontSize: fontSize,
@@ -15,35 +14,28 @@ class AppFonts {
       );
 
   //FontWeight 500
-  static TextStyle regular(
-      [double fontSize = 16, Color color = Colors.black]) =>
-      TextStyle(
+  static TextStyle regular([double fontSize = 16, Color color = Colors.black]) => TextStyle(
         fontWeight: FontWeight.w500,
         fontSize: fontSize,
         color: color,
       );
 
   //FontWeight 600
-  static TextStyle normalBold(
-      [double fontSize = 16, Color color = Colors.black]) =>
-      TextStyle(
+  static TextStyle normalBold([double fontSize = 16, Color color = Colors.black]) => TextStyle(
         fontWeight: FontWeight.w600,
         fontSize: fontSize,
         color: color,
       );
 
   //FontWeight 700
-  static TextStyle bold([double fontSize = 16, Color color = Colors.black]) =>
-      TextStyle(
+  static TextStyle bold([double fontSize = 16, Color color = Colors.black]) => TextStyle(
         fontWeight: FontWeight.w700,
         fontSize: fontSize,
         color: color,
       );
 
   //FontWeight 800
-  static TextStyle ultraBold(
-      [double fontSize = 16, Color color = Colors.black]) =>
-      TextStyle(
+  static TextStyle ultraBold([double fontSize = 16, Color color = Colors.black]) => TextStyle(
         fontWeight: FontWeight.w800,
         fontSize: fontSize,
         color: color,

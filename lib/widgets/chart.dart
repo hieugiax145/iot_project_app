@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:iot_app/model/sensors_data_model.dart';
@@ -20,34 +19,9 @@ class ChartSensors extends StatefulWidget {
 class _ChartSensorsState extends State<ChartSensors> {
   ChartSeriesController? _chartSeriesController;
   Timer? timer;
-  // int count = 19;
-  //
-  // List<_ChartData> chartData = <_ChartData>[
-  //   // _ChartData(0, 42),
-  //   // _ChartData(1, 47),
-  //   // _ChartData(2, 33),
-  //   // _ChartData(3, 49),
-  //   // _ChartData(4, 54),
-  //   // _ChartData(5, 41),
-  //   // _ChartData(6, 58),
-  //   // _ChartData(7, 51),
-  //   // _ChartData(8, 98),
-  //   // _ChartData(9, 41),
-  //   // _ChartData(10, 53),
-  //   // _ChartData(11, 72),
-  //   // _ChartData(12, 86),
-  //   // _ChartData(13, 52),
-  //   // _ChartData(14, 94),
-  //   // _ChartData(15, 92),
-  //   // _ChartData(16, 86),
-  //   // _ChartData(17, 72),
-  //   // _ChartData(18, 94),
-  // ];
-  //
+
   void _updateDataSource(Timer timer) {
-    // chartData.add(_ChartData(count, Random().nextInt(100)));
     if (context.read<DataProvider>().listRealtime.length == 8) {
-      // context.read<SensorsProvider>().listRemove(0);
       _chartSeriesController?.updateDataSource(
         addedDataIndexes: <int>[
           context.read<DataProvider>().listRealtime.length - 1

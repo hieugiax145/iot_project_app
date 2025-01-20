@@ -5,11 +5,7 @@ import 'package:iot_app/utils/extension.dart';
 import 'package:iot_app/widgets/touchable_widget.dart';
 
 class PageNumber extends StatelessWidget {
-  const PageNumber(
-      {super.key,
-      required this.currentPage,
-      required this.totalPage,
-      required this.onTap});
+  const PageNumber({super.key, required this.currentPage, required this.totalPage, required this.onTap});
 
   final int currentPage;
   final int totalPage;
@@ -17,10 +13,7 @@ class PageNumber extends StatelessWidget {
 
   List<Widget> _buildListPage() => [
         for (int i = 1; i <= totalPage; i++)
-          ItemPage(
-              text: i.toString(),
-              value: currentPage == i,
-              onTap: () => onTap(i))
+          ItemPage(text: i.toString(), value: currentPage == i, onTap: () => onTap(i))
       ];
 
   Widget _baseRow(BuildContext context, List<Widget> numberPages) {
@@ -32,8 +25,7 @@ class PageNumber extends StatelessWidget {
                 onPressed: () => onTap(currentPage - 1),
                 child: Container(
                     padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: AppThemes.background),
+                    decoration: const BoxDecoration(shape: BoxShape.circle, color: AppThemes.background),
                     child: const Icon(Icons.navigate_before)),
               ),
         const SizedBox(width: 4),
@@ -47,8 +39,7 @@ class PageNumber extends StatelessWidget {
                 onPressed: () => onTap(currentPage + 1),
                 child: Container(
                     padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: AppThemes.background),
+                    decoration: const BoxDecoration(shape: BoxShape.circle, color: AppThemes.background),
                     child: const Icon(Icons.navigate_next)),
               )
       ],
@@ -141,8 +132,7 @@ class ItemPage extends StatelessWidget {
                 text ?? "",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: AppFonts.regular(
-                    16, value == true ? AppThemes.background : Colors.black),
+                style: AppFonts.regular(16, value == true ? AppThemes.background : Colors.black),
               ),
         ));
   }

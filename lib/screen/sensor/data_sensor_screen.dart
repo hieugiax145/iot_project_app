@@ -8,7 +8,7 @@ import 'package:iot_app/provider/data_provider.dart';
 import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
-import 'package:iot_app/screen/base_screen/bases_creen.dart';
+import 'package:iot_app/screen/base_screen/bases_screen.dart';
 import 'package:iot_app/screen/sensor/data_filter.dart';
 import 'package:iot_app/widgets/page_number.dart';
 import 'package:iot_app/widgets/table_sensor.dart';

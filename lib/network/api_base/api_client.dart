@@ -72,16 +72,13 @@ class ApiClient {
     // }
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString('jwt');
-    Map<String, dynamic> headerMap =
-        token != null ? {'Authorization': "Bearer $token"} : {};
+    Map<String, dynamic> headerMap = token != null ? {'Authorization': "Bearer $token"} : {};
     headerMap.putIfAbsent("accept", () => "*/*");
 
     Response response;
     try {
       response = await _dio.request(url,
-          data: formData != null
-              ? FormData.fromMap(formData)
-              : data ?? jsonEncode({}),
+          data: formData != null ? FormData.fromMap(formData) : data ?? jsonEncode({}),
           options: Options(
               method: method,
               sendTimeout: const Duration(seconds: 120),
