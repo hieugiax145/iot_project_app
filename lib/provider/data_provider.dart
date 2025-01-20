@@ -18,8 +18,8 @@ class DataProvider extends ChangeNotifier {
 
   ActionModel _latest = ActionModel();
   SensorsDataModel _latest2 = SensorsDataModel();
-  List<SensorsDataModel> _list = [];
-  List<SensorsDataModel> _listRealtime = [];
+  final List<SensorsDataModel> _list = [];
+  final List<SensorsDataModel> _listRealtime = [];
 
   late final IO.Socket socket;
 
@@ -28,7 +28,7 @@ class DataProvider extends ChangeNotifier {
   List<SensorsDataModel> get list => _list;
   List<SensorsDataModel> get listRealtime => _listRealtime;
 
-  List<ActionModel> _actions = [];
+  final List<ActionModel> _actions = [];
   List<ActionModel> get actions => _actions;
 
   int totalItem = 0;
@@ -41,8 +41,7 @@ class DataProvider extends ChangeNotifier {
   get currentPage => _currentPage;
 
   DataProvider() {
-    socket = IO.io(ApiRequest.domain,
-        IO.OptionBuilder().setTransports(['websocket']).build());
+    socket = IO.io(ApiRequest.domain, IO.OptionBuilder().setTransports(['websocket']).build());
     socket.onConnect((_) {
       print("connected");
       getNewData();
@@ -136,9 +135,8 @@ class DataProvider extends ChangeNotifier {
             endDate: query.endDate)
         .then((res) {
       if (res.message == "Success") {
-        final List<SensorsDataModel> list = res.data
-            .map<SensorsDataModel>((e) => SensorsDataModel.fromJson(e))
-            .toList();
+        final List<SensorsDataModel> list =
+            res.data.map<SensorsDataModel>((e) => SensorsDataModel.fromJson(e)).toList();
         _list
           ..clear()
           ..addAll(list);
@@ -173,8 +171,7 @@ class DataProvider extends ChangeNotifier {
             endDate: query.endDate)
         .then((res) {
       if (res.message == "Success") {
-        final List<ActionModel> list =
-            res.data.map<ActionModel>((e) => ActionModel.fromJson(e)).toList();
+        final List<ActionModel> list = res.data.map<ActionModel>((e) => ActionModel.fromJson(e)).toList();
         _actions
           ..clear()
           ..addAll(list);
@@ -192,10 +189,5 @@ class Query {
   String? startDate;
   String? endDate;
 
-  Query(
-      {this.page,
-      this.limit,
-      this.order = "DESC",
-      this.startDate,
-      this.endDate});
+  Query({this.page, this.limit, this.order = "DESC", this.startDate, this.endDate});
 }

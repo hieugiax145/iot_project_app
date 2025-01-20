@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iot_app/app/app_themes.dart';
-import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/widgets/sensor_tile.dart';
 
@@ -18,7 +17,7 @@ class SensorWidget extends StatefulWidget {
 class _SensorWidgetState extends State<SensorWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       // height: 80,
       width: double.infinity,
       child: Wrap(
@@ -30,7 +29,7 @@ class _SensorWidgetState extends State<SensorWidget> {
               unit: "\u2103",
               value: widget.temp ?? 0,
               icon: AppImages.sensorTemp,
-              color: [
+              color: const [
                 AppThemes.temp0,
                 AppThemes.temp1,
                 AppThemes.temp2,
@@ -43,7 +42,7 @@ class _SensorWidgetState extends State<SensorWidget> {
               unit: "%",
               value: widget.hum ?? 0,
               icon: AppImages.sensorHumidity,
-              color: [
+              color: const [
                 AppThemes.hum0,
                 AppThemes.hum1,
                 AppThemes.hum2,
@@ -56,7 +55,7 @@ class _SensorWidgetState extends State<SensorWidget> {
               unit: "%",
               value: widget.light ?? 0,
               icon: AppImages.sensorLight,
-              color: [
+              color: const [
                 AppThemes.light0,
                 AppThemes.light1,
                 AppThemes.light2,

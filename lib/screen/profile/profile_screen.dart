@@ -5,8 +5,7 @@ import 'package:iot_app/provider/data_provider.dart';
 import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
-import 'package:iot_app/screen/base_screen/bases_creen.dart';
-import 'package:iot_app/screen/test_screen.dart';
+import 'package:iot_app/screen/base_screen/bases_screen.dart';
 import 'package:iot_app/widgets/row_information.dart';
 import 'package:provider/provider.dart';
 
@@ -39,9 +38,7 @@ class ProfileScreenState extends BaseState<ProfileScreen> with BaseScreenMixin {
         Container(
           height: 160,
           width: 160,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(width: 5, color: AppThemes.white)),
+          decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(width: 5, color: AppThemes.white)),
           child: ClipOval(
             child: Image.asset(
               AppImages.avatar,

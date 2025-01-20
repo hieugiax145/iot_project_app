@@ -1,6 +1,6 @@
 # iot_app
 
-This IoT app was made for my iot subject at university
+This IoT app was made for my IoT subject at university
 
 ## Dashboard
 

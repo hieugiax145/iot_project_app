@@ -15,12 +15,7 @@ class HomeMain extends StatefulWidget {
 }
 
 class _HomeMainState extends State<HomeMain> {
-  List tabs = [
-    const DashboardScreen(),
-    const DataSensorScreen(),
-    const ActionHistoryScreen(),
-    const ProfileScreen()
-  ];
+  List tabs = [const DashboardScreen(), const DataSensorScreen(), const ActionHistoryScreen(), const ProfileScreen()];
 
   int _currentIndex = 0;
 
@@ -33,13 +28,9 @@ class _HomeMainState extends State<HomeMain> {
         height: 64,
         decoration: const BoxDecoration(color: AppThemes.background),
         child: Container(
-          decoration: const BoxDecoration(boxShadow: [
-            BoxShadow(
-                color: Colors.grey,
-                offset: Offset(0, 1),
-                spreadRadius: 0.2,
-                blurRadius: 1)
-          ], color: AppThemes.background),
+          decoration: const BoxDecoration(
+              boxShadow: [BoxShadow(color: Colors.grey, offset: Offset(0, 1), spreadRadius: 0.2, blurRadius: 1)],
+              color: AppThemes.background),
           child: Row(
             // crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -92,34 +83,6 @@ class _HomeMainState extends State<HomeMain> {
           ),
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   onTap: (idx) {
-      //     setState(() {
-      //       _currentIndex = idx;
-      //     });
-      //   },
-      //   items: [
-      //     BottomNavigationBarItem(
-      //         icon: Image.asset(
-      //           AppImages.iconDashboard,
-      //           height: 30,
-      //         ),
-      //         label: "Dashboard",
-      //         backgroundColor: AppThemes.background),
-      //     BottomNavigationBarItem(
-      //         icon: Image.asset(AppImages.iconChart),
-      //         label: "Sensors",
-      //         backgroundColor: AppThemes.background),
-      //     BottomNavigationBarItem(
-      //         icon: Image.asset(AppImages.iconHistory),
-      //         label: "Action",
-      //         backgroundColor: AppThemes.background),
-      //     BottomNavigationBarItem(
-      //         icon: Image.asset(AppImages.iconInfo),
-      //         label: "Profile",
-      //         backgroundColor: AppThemes.background)
-      //   ],
-      // ),
       body: tabs[_currentIndex],
     );
   }

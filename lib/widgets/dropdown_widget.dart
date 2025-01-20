@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iot_app/model/dropdown_model.dart';
 
 import '../app/app_themes.dart';
-import '../resource/fonts/app_fonts.dart';
 
 class DropdownWidget extends StatelessWidget {
   const DropdownWidget(

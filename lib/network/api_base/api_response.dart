@@ -26,8 +26,7 @@ class ApiResponse {
     // this.totalItemRespondent,
   });
 
-  factory ApiResponse.fromJson(Map<String, dynamic> json) =>
-      _$ApiResponseFromJson(json);
+  factory ApiResponse.fromJson(Map<String, dynamic> json) => _$ApiResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ApiResponseToJson(this);
 }

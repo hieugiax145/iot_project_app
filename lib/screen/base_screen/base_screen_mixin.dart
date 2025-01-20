@@ -4,7 +4,7 @@ import '../../app/app_themes.dart';
 import '../../resource/fonts/app_fonts.dart';
 import '../../utils/dimens_scale.dart';
 import '../../widgets/touchable_widget.dart';
-import 'bases_creen.dart';
+import 'bases_screen.dart';
 
 mixin BaseScreenMixin<Page extends BaseScreen> on BaseState<Page> {
   Widget? buildHeaderExtend() => null;
@@ -53,56 +53,15 @@ mixin BaseScreenMixin<Page extends BaseScreen> on BaseState<Page> {
         ? DimensScale.getInstance(context)?.verticalScale(0)
         : 0; // tăng size cho các màn hình có thanh trạng thái lớn (VD: Iphone X)
     // double? addSizeHeight = 0;
-    double heightHeader = (setSizeHeaderBackground() ??
-            DimensScale.getInstance(context)?.verticalScale(80))! +
-        addSizeHeight!;
+    double heightHeader =
+        (setSizeHeaderBackground() ?? DimensScale.getInstance(context)?.verticalScale(80))! + addSizeHeight!;
     double heightHeaderContent =
-        DimensScale.getInstance(context)!.verticalScale(80) -
-            MediaQuery.of(context).padding.top +
-            addSizeHeight;
+        DimensScale.getInstance(context)!.verticalScale(80) - MediaQuery.of(context).padding.top + addSizeHeight;
     return Stack(
       children: [
         setHeaderBackgroundColor() == null
             ? Positioned.fill(
-                child: Stack(children: [
-                  // Image.asset(
-                  //     width: MediaQuery.of(context).size.width,
-                  //     // height: heightHeaderContent,
-                  //     fit: BoxFit.cover,
-                  //     // scale: ,
-                  //     alignment: Alignment.bottomCenter,
-                  //     AppImages.background),
-                  // Container(
-                  //   width: MediaQuery.of(context).size.width,
-                  //   height: heightHeaderContent,
-                  //   decoration: BoxDecoration(
-                  //     gradient: LinearGradient(
-                  //       begin: Alignment.topCenter,
-                  //       end: Alignment.bottomCenter,
-                  //       colors: [
-                  //         Theme.of(context)
-                  //             .colorScheme
-                  //             .surface
-                  //             .withOpacity(0.6),
-                  //         Theme.of(context)
-                  //             .colorScheme
-                  //             .surface
-                  //             .withOpacity(0.7),
-                  //         Theme.of(context)
-                  //             .colorScheme
-                  //             .surface
-                  //             .withOpacity(0.8),
-                  //         Theme.of(context)
-                  //             .colorScheme
-                  //             .surface
-                  //             .withOpacity(0.9),
-                  //         AppThemes.background.withOpacity(1),
-                  //         AppThemes.background.withOpacity(1),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                ]),
+                child: Stack(children: []),
               )
             : Positioned.fill(
                 child: Container(
@@ -110,10 +69,7 @@ mixin BaseScreenMixin<Page extends BaseScreen> on BaseState<Page> {
                   // height: heightHeader,
                   decoration: BoxDecoration(
                       color: setHeaderBackgroundColor() ?? AppThemes.background,
-                      border: Border.all(
-                          width: 0,
-                          color: setHeaderBackgroundColor() ??
-                              Colors.transparent)),
+                      border: Border.all(width: 0, color: setHeaderBackgroundColor() ?? Colors.transparent)),
                 ),
               ),
         Container(

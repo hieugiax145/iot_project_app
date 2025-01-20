@@ -1,4 +1,3 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:iot_app/app/app_themes.dart';
 import 'package:iot_app/network/api_request.dart';
@@ -6,12 +5,11 @@ import 'package:iot_app/provider/data_provider.dart';
 import 'package:iot_app/resource/fonts/app_fonts.dart';
 import 'package:iot_app/resource/images/app_images.dart';
 import 'package:iot_app/screen/base_screen/base_screen_mixin.dart';
-import 'package:iot_app/screen/base_screen/bases_creen.dart';
+import 'package:iot_app/screen/base_screen/bases_screen.dart';
 import 'package:iot_app/utils/extension.dart';
 import 'package:iot_app/widgets/chart.dart';
 import 'package:iot_app/widgets/sensor_status.dart';
 import 'package:iot_app/widgets/sensor_widget.dart';
-import 'package:iot_app/widgets/test_chart.dart';
 import 'package:provider/provider.dart';
 
 class DashboardScreen extends BaseScreen {
@@ -21,8 +19,7 @@ class DashboardScreen extends BaseScreen {
   State<StatefulWidget> createState() => DashboardScreenState();
 }
 
-class DashboardScreenState extends BaseState<DashboardScreen>
-    with BaseScreenMixin {
+class DashboardScreenState extends BaseState<DashboardScreen> with BaseScreenMixin {
   @override
   String setTitle() => "Dashboard";
 
@@ -39,40 +36,26 @@ class DashboardScreenState extends BaseState<DashboardScreen>
   bool light = false;
 
   fetchData() async {
-    // await context.read<DataProvider>().getNewData();
-    await context.read<DataProvider>().getLatestAction1();
-    await context.read<DataProvider>().getLatestAction2();
-    light = context.read<DataProvider>().device1.action == 1 ? true : false;
-    fan = context.read<DataProvider>().device2.action == 1 ? true : false;
+    await context.read<DataProvider>().getNewData();
   }
 
   @override
   void initState() {
-    fetchData();
+    // TODO: implement initState
+    // fetchData();
     // context.read<SensorsProvider>().getNewData();
   }
 
   @override
   Widget buildBody(BuildContext context) {
-    return Consumer<DataProvider>(
-        builder: (BuildContext context, DataProvider sensor, Widget? child) {
+    return Consumer<DataProvider>(builder: (BuildContext context, DataProvider sensor, Widget? child) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // StreamBuilder(
-              //   stream: channel.stream,
-              //   builder:
-              //       (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              //     return Text(snapshot.hasData?"${snapshot.data}":"helo");
-              //   },
-              // ),
-              SensorWidget(
-                  temp: sensor.latest2.temp,
-                  hum: sensor.latest2.hum,
-                  light: sensor.latest2.light),
+              SensorWidget(temp: sensor.latest2.temp, hum: sensor.latest2.hum, light: sensor.latest2.light),
               Text(
                 "Devices",
                 style: AppFonts.normalBold(16),
@@ -86,12 +69,9 @@ class DashboardScreenState extends BaseState<DashboardScreen>
                     iconOff: AppImages.deviceLightOff,
                     value: light,
                     onChanged: (e) {
-                      ApiRequest.changeAction("led1",e == true ? 1 : 0).then((res) {
-                        if (res.message == "Success") {
-                          setState(() {
-                            light = e;
-                          });
-                        }
+                      ApiRequest.changeAction(e == true ? 1 : 0);
+                      setState(() {
+                        light = e;
                       });
                     },
                   ),
@@ -101,25 +81,18 @@ class DashboardScreenState extends BaseState<DashboardScreen>
                     isSpin: true,
                     value: fan,
                     onChanged: (e) {
-                      ApiRequest.changeAction("led2",e == true ? 1 : 0).then((res) {
-                        if (res.message == "Success") {
-                          setState(() {
-                            fan = e;
-                          });
-                        }
+                      setState(() {
+                        fan = e;
                       });
                     },
                   )
-                  // SensorStatus(),
                 ],
               ),
               Text(
                 "Sensors Chart",
                 style: AppFonts.normalBold(16),
               ),
-              // TestChart(),
               const ChartSensors(),
-
               const SizedBox.shrink()
             ].addBetween(const SizedBox(height: 16)),
           ),
